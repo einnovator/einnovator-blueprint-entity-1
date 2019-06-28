@@ -1,0 +1,2 @@
+c) Apache License - App Blueprint for EInnovator Micro-Services Suite
+              

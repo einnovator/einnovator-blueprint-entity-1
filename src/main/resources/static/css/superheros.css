@@ -1,0 +1,171 @@
+.table .img {
+	height: 100px;
+}
+
+.img {
+	height: 300px;
+}
+.header {
+	background-image: url("/img/superheros1-wide.jpg");
+	height: 80px;
+	background-size: cover;
+	color: white;
+}
+
+.footer {
+	border-top: none;
+	background-image: url("/img/superheros2-wide.jpg");
+	height: 160px;
+	padding: 100px 50px 10px 50px;
+	color: white !important;
+}
+
+
+
+.footer a, .footer a:hover, .footer a:visited, .footer a:active, .footer a:focus {
+	color: white !important;
+}
+
+.user-name {
+	color: white;
+}
+
+.user-title {
+	color: white;
+}
+
+.logo-box {
+}
+
+.header-title {
+}
+
+.breadcrumb {
+	background-color: inherit;
+}
+
+.menu-wrapper {
+}
+
+.ribbon {
+	background-color: #2876d7;
+	overflow: hidden;
+	white-space: nowrap;
+	position: absolute;
+	right: -50px;
+	top: 40px;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	transform: rotate(45deg);
+	-webkit-box-shadow: 0 0 10px #888;
+	-moz-box-shadow: 0 0 10px #888;
+	box-shadow: 0 0 10px #888;
+}
+
+.ribbon a {
+	border: 1px solid #faa;
+	color: #fff;
+	display: block;
+	font: bold 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	margin: 1px 0;
+	padding: 10px 50px;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 0 0 5px #444;
+}
+
+
+.col-user-info {
+	padding-right: 180px;
+}
+
+.user-box .dropdown {
+	right: 280px;
+	min-width: 210px;
+}
+.user-img {
+	background-color: white;
+	border-radius: 50%;
+}
+
+.card-header {
+	background-color: #476bbc;
+	color: white;
+	text-transform: uppercase;
+}
+
+.pager {
+	background-color: inherit;
+}
+
+.card p {
+    margin-top: 0;
+    margin-bottom: 10px;
+	font-size: medium;
+}
+
+.btn-upload {
+	left: -30;
+	top: 100;		
+}
+
+.btn-blue, a.btn-blue {
+  background: #476bbc !important;
+  border: #476bbc !important;
+  color: white !important;
+}
+.btn-blue:hover, .btn-blue:focus, .btn-blue:active {
+  background-color: #5086e9 !important;
+  box-shadow: none !important;
+}
+
+a, a:hover, a:visited, a:active, a:focus {
+	color: black;
+}
+
+.btn-primary, a.btn-primary {
+  background: #1d7835 !important;
+  border: #1d7835 !important;
+  color: white !important;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+  background-color: #218b3d !important;
+  box-shadow: none !important;
+}
+
+.avatar {
+    height: 65px !important;
+    border-radius: 15px;
+}
+
+.squad {
+	font-weight: bold;
+}
+
+.squad-img {
+	height: 50px;
+	display: inline-block;
+	margin-right: 10px;	
+}
+.table .squad-img {
+	height: 30px;
+	margin-right: 5px;	
+}
+.type {
+	font-weight: bold;
+}
+
+.layout2 > :first-child {
+	background-color: #f8f8f8;
+	margin: 40px 50px;
+	padding: 30px 50px;
+	border-top: 2px solid #00a;
+	border-bottom: 2px solid #0a0;
+}
+
+.layout2 > :last-child {
+	margin-left: 0px;
+}

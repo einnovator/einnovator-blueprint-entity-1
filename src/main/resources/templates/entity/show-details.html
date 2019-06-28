@@ -1,0 +1,41 @@
+<div xmlns:th="http://www.thymeleaf.org">
+
+	<div class="form-group d-flex">
+		<img class="img mr-5" th:src="${!#strings.isEmpty(entity.avatar) ? entity.avatar : '/img/entity.png'}" />
+
+		<div class="ml-5">
+			<div class="form-group">
+				<label>Name</label>
+				<span class="h1 d-block">
+					<span th:text="${entity.name}" ></span>
+				</span>
+			</div>
+		
+			<div class="form-group">
+				<label>Squad</label>
+				<span class="d-block">
+					<img class="squad-img" th:if="${entity.squad!=null and entity.squad.name()=='MARVEL'}"  src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/MarvelLogo.svg/330px-MarvelLogo.svg.png"></img>
+					<img class="squad-img" th:if="${entity.squad!=null and entity.squad.name()=='DC'}"  src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/DC_Comics_logo.png/900px-DC_Comics_logo.png"></img>
+					<span class="squad" th:text="${entity.squad}" ></span>
+				</span>
+			</div>
+		
+			<div class="form-group">
+				<label>Type</label>
+				<span class="d-block">
+					<span th:text="${#bools.isTrue(entity.villain) ? 'Check' : 'Hero'}" class="type"></span>
+				</span>
+			</div>
+		
+		</div>
+	</div>
+	
+
+
+
+	<div class="form-group">
+		<label for="description">About</label>
+		<p id="description" th:text="${entity.description}"></p>
+	</div>
+
+</div>

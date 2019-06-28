@@ -1,0 +1,61 @@
+<html xmlns:th="http://www.thymeleaf.org" th:with="title=${(entity!=null and entity.id!=null ? 'Edit' : 'New') + ' Superhero'}">
+<head th:include="layout/layout :: head(title=${title})"></head>
+<body th:with="bcs=${ {'Entities', 'Superhero', title} }">
+	<div th:replace="layout/header"></div>
+
+	<div class="container-fluid">
+		<div class="layout2">
+			<div>
+
+				<div th:replace="layout/breadcrumbs"></div>
+	
+
+				<h1 class="h1 mb-4"><i class="fas fa-mask ico-lg"></i> <span th:text="${title}"></span>  <span class="hbar"></span></h1>
+					
+				<div th:replace="entity/edit-avatar"></div>
+		
+				<form method="post" name="f" th:action="@{${'/entity'+ (entity.uuid!=null ? '/' + entity.uuid : '')}}" th:object="${entity}" class="form">
+					<input type="hidden" name="_method" value="put" th:if="${entity.id!=null}" />
+					<input type="hidden" th:if="${entity.id != null}" id="id" name="id" th:value="${entity.id}" />
+					<input type="hidden" th:if="${entity.uuid != null}" id="uuid" name="uuid" th:value="${entity.uuid}" />
+					<input type="hidden" id="img" name="img" th:value="${entity.avatar}" />
+		
+					<div th:replace="entity/edit-details"></div>
+		
+					<div class="container-footer row">
+						<div class="col-2">
+							<a class="btn btn-link btn-cancel  "  th:href="@{/entity}"><i class="fas fa-chevron-circle-left"></i> Back</a>
+						</div>
+						<div class="col-10 text-right">
+							<button type="submit" class="btn btn-lg btn-primary"><i class="far fa-check-circle"></i> Submit</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div>
+				<div th:replace="layout/panel-right"></div>
+			</div>
+		</div>
+	</div>
+
+		
+</body>
+<script th:inline="javascript">
+//<![CDATA[	
+//var entity = JSON.parse([[${entityJson}]]);
+var entities = [[${entitiesJson}]];
+var pid = [[${entity.uuid}]];
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+$(function() {
+	$(".phoneCode").country({phoneCode: true});	
+	$(".date").datepicker({altFormat: "mm-dd-yy", minDate: new Date(), timepicker: false});
+	//ckeditormini('body');
+	//ckeditorfull('entityeditor', {ckoptions: {height: '600px'}});
+});
+// ]]>	
+</script>
+</html>

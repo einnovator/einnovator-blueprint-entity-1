@@ -1,0 +1,35 @@
+<table  id="table" class="table"  xmlns:th="http://www.thymeleaf.org"  th:attr="data-page=${pageJson}">
+	<tr>
+		<th style="width: 2em"></th>
+		<th style="width: 40px"></th>
+		<th>Name</th>
+		<th class="text-center">Squad</th>
+		<th class="text-center">Type</th>
+		<th style="width: 4em"></th>
+	</tr>
+
+	
+	<tr th:each="entity: ${entities}">
+		<td></td>
+		<td  style="width: 40px">
+			<a th:href="${'/entity/'+entity.uuid}">
+				<img class="avatar" th:src="${!#strings.isEmpty(entity.avatar) ? entity.avatar : links.cdn + '/img/avatar.png'}" />
+			</a>		
+		</td>
+		<td>
+			<a th:href="${'/entity/'+entity.uuid}" class="bold">
+				<span class="s" th:text="${entity.name}"></span>
+			</a>
+		</td>
+		<td class="text-center">
+			<img class="squad-img" th:if="${entity.squad!=null and entity.squad.name()=='MARVEL'}"  src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/MarvelLogo.svg/330px-MarvelLogo.svg.png"></img>
+			<img class="squad-img" th:if="${entity.squad!=null and entity.squad.name()=='DC'}"  src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/DC_Comics_logo.png/900px-DC_Comics_logo.png"></img>
+			<span th:if="${entity.squad!=null}" th:text="${entity.squad.displayValue}" class="squad"></span>
+		</td>
+		<td class="text-center">
+			<span th:text="${#bools.isTrue(entity.villain) ? 'Check' : 'Hero'}" class="type"></span>
+		</td>
+		<td></td>
+	</tr>		
+	
+</table>
