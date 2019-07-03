@@ -59,11 +59,11 @@ public class MyEntityController extends ControllerBase {
 		MyEntity entity = manager.find(id);
 
 		if (entity == null) {
-			notfound("show", request, redirectAttributes);
+			flashNotfound("show", request, redirectAttributes);
 			return redirect("/entity");
 		}
 		if (!isAllowedView(principal, entity)) {
-			forbidden("show", request, redirectAttributes);
+			flashForbidden("show", request, redirectAttributes);
 			return redirect("/entity");
 		}
 		model.addAttribute("entity", entity);
@@ -88,18 +88,18 @@ public class MyEntityController extends ControllerBase {
 			Model model, Principal principal, RedirectAttributes redirectAttributes, HttpServletRequest request) {
 
 		if (!isAllowedCreate(principal, entity)) {
-			forbidden("createPOST", request, redirectAttributes);
+			flashForbidden("createPOST", request, redirectAttributes);
 			return redirect("/entity");
 		}
 		if (errors.hasErrors()) {
 			addCommonToModel(principal, model);
-			failure("createPOST", request, redirectAttributes, errors);
+			flashFailure("createPOST", request, redirectAttributes, errors);
 			return "entity/edit";
 		}
 		MyEntity entity2 = manager.create(entity, true);
 		if (entity2 == null) {
 			logger.error("createPOST: " + entity);
-			failure("createPOST", request, redirectAttributes, entity);
+			flashFailure("createPOST", request, redirectAttributes, entity);
 			return "";
 		}
 		logger.info("createPOST: " + entity2);
@@ -113,11 +113,11 @@ public class MyEntityController extends ControllerBase {
 
 		MyEntity entity = manager.find(id);
 		if (entity == null) {
-			notfound("editGet", request, redirectAttributes);
+			flashNotfound("editGet", request, redirectAttributes);
 			return redirect("/entity");
 		}
 		if (!isAllowedManage(principal, entity)) {
-			forbidden("show", request, redirectAttributes);
+			flashForbidden("show", request, redirectAttributes);
 			return redirect("/entity");
 		}
 		
@@ -132,11 +132,11 @@ public class MyEntityController extends ControllerBase {
 
 		MyEntity entity0 = manager.find(id_);
 		if (entity0 == null) {
-			notfound("editPut", request, redirectAttributes);
+			flashNotfound("editPut", request, redirectAttributes);
 			return redirect("/entity");
 		}
 		if (!isAllowedManage(principal, entity0)) {
-			forbidden("editPut", request, redirectAttributes);
+			flashForbidden("editPut", request, redirectAttributes);
 			return redirect("/entity");
 		}
 		entity.setId(entity0.getId());
@@ -145,7 +145,7 @@ public class MyEntityController extends ControllerBase {
 			logger.error("editPut:  " + HttpStatus.BAD_REQUEST.getReasonPhrase());
 			return redirect("/entity");
 		}
-		success("editPut", request, redirectAttributes, entity);
+		flashSuccess("editPut", request, redirectAttributes, entity);
 		model.addAttribute("entity", entity2);
 		return redirect("/entity/" + entity.getUuid());
 	}
@@ -155,20 +155,20 @@ public class MyEntityController extends ControllerBase {
 			Model model, Principal principal, RedirectAttributes redirectAttributes, HttpServletRequest request) {
 		MyEntity entity = manager.find(id);
 		if (entity == null) {
-			notfound("delete", request, redirectAttributes);
+			flashNotfound("delete", request, redirectAttributes);
 			return redirect("/");
 		}
 		if (!isAllowedManage(principal, entity)) {
-			forbidden("delete", request, redirectAttributes);
+			flashForbidden("delete", request, redirectAttributes);
 			return redirect("/");
 		}
 
 		MyEntity entity2 = manager.delete(entity, false);
 		if (entity2 == null) {
-			failure("delete", request, redirectAttributes, id);
+			flashFailure("delete", request, redirectAttributes, id);
 			return redirect("/entity/" + entity.getUuid());
 		}
-		success("delete", request, redirectAttributes, entity);
+		flashSuccess("delete", request, redirectAttributes, entity);
 		return redirect("/entity");
 	}
 
