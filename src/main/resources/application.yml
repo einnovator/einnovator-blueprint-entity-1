@@ -89,7 +89,12 @@ documents:
   
 social:
   server: https://social.samples.sandbox.nativex.cloud
-  
+  registration:
+    auto: true
+    channels:
+    - name: "General"
+      type: "FORUM"
+      purpose: "General discussion forum"  
 ui:
   links:
     cdn: http://cdn.samples.sandbox.nativex.cloud
