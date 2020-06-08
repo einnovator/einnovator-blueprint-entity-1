@@ -56,6 +56,21 @@ public class MyEntityManagerImpl extends ManagerBaseImpl3<MyEntity> implements M
 	}
 	
 	@Override
+	public MyEntity find(MyEntity entity) {
+		MyEntity entity0 = super.find(entity);
+		if (entity0!=null) {
+			return entity0;
+		}
+		if (entity.getName()!=null) {
+			entity0 = findOneByName(entity.getName());			
+			if (entity0!=null) {
+				return entity0;
+			}
+		}
+		return entity0;
+	}
+	
+	@Override
 	public MyEntity findOneByName(String name) {
 		Optional<MyEntity> entity = repository.findOneByName(name);
 		return entity.isPresent() ? processAfterLoad(entity.get(), null) : null;
@@ -89,7 +104,7 @@ public class MyEntityManagerImpl extends ManagerBaseImpl3<MyEntity> implements M
 	public void processAfterPersistence(MyEntity entity) {
 		super.processAfterPersistence(entity);
 		Channel channel = entity.makeChannel(getBaseUri());
-		channel = channelManager.createOrUpdateChannel(channel);
+		channel = channelManager.createOrUpdateChannel(channel, null);
 		if (channel!=null && entity.getChannelId()==null) {
 			entity.setChannelId(channel.getUuid());
 			repository.save(entity);			
@@ -121,26 +136,5 @@ public class MyEntityManagerImpl extends ManagerBaseImpl3<MyEntity> implements M
 		
 	}
 
-	@Override
-	public void createOrUpdate(List<MyEntity> entities) {
-		if (entities != null) {
-			for (MyEntity entity : entities) {
-				if (entity.getName()==null) {
-					logger.warn("createOrUpdate: skipping:" + entity);
-					continue;
-				}
-				MyEntity entity2 = findOneByName(entity.getName());
-				if (entity2 != null) {
-					entity.setId(entity2.getId());
-					logger.info("createOrUpdate: update:" + entity);
-					update(entity);
-				} else {
-					logger.info("createOrUpdate: create:" + entity);
-					create(entity);
-				}
-			}
-		}
-	}
-
-
+	
 }

@@ -7,7 +7,6 @@ import javax.persistence.Enumerated;
 
 import org.einnovator.jpa.model.EntityBase2;
 import org.einnovator.social.client.model.Channel;
-import org.einnovator.social.client.model.ChannelBuilder;
 import org.einnovator.social.client.model.ChannelType;
 import org.einnovator.util.model.Ref;
 import org.einnovator.util.model.RefBuilder;
@@ -27,7 +26,7 @@ public class MyEntity extends EntityBase2<Long> {
 	@Enumerated(EnumType.STRING)
 	private Status status;
 
-	@Column(length=256)
+	@Column(length=255)
 	private String img;
 
 	private Boolean check;
@@ -143,19 +142,16 @@ public class MyEntity extends EntityBase2<Long> {
 				;
 	}
 	
-	/**
-	 * @return
-	 */
+
 	public Channel makeChannel(String baseUri) {
-		return new ChannelBuilder()
-				.uuid(channelId)
-				.name(name)
-				.purpose("Discussion channel about " + name)
-				.img(img)
-				.thumbnail(img)
-				.type(ChannelType.COMMENTS)
-				.ref(makeRef(baseUri))
-				.build();
+		return (Channel)new Channel()
+				.withName(name)
+				.withPurpose("Discussion about " + name)
+				.withImg(img)
+				.withThumbnail(img)
+				.withType(ChannelType.COMMENTS)
+				.withRef(makeRef(baseUri))
+				.withUuid(channelId);
 	}
 	
 	public Ref makeRef(String baseUri) {

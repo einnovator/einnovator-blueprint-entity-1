@@ -39,7 +39,8 @@ public class MyEntityController extends ControllerBase {
 	private MyEntityManager manager;
 
 	@GetMapping
-	public String list(@ModelAttribute("filter") MyEntityFilter filter, PageOptions options,  @RequestParam(required=false) Boolean async,
+	public String list(@ModelAttribute("filter") MyEntityFilter filter, PageOptions options,  
+			@RequestParam(required=false) Boolean async,
 			Model model, Principal principal, RedirectAttributes redirectAttributes, HttpServletRequest request) {
 		
 		Page<MyEntity> page = manager.findAll(filter, options.toPageRequest());
@@ -47,7 +48,7 @@ public class MyEntityController extends ControllerBase {
 		model.addAttribute("page", page);
 		model.addAttribute("pageJson", PageUtil.toJson(page, false));
 
-		logger.info("list: " + PageUtil.toString(page) + " " + filter + " " + options);
+		debug("list", PageUtil.toString(page), filter, options);
 		return Boolean.TRUE.equals(async) ? "entity/entity-table" : "entity/list";
 
 	}
@@ -69,8 +70,7 @@ public class MyEntityController extends ControllerBase {
 		model.addAttribute("entity", entity);
 		model.addAttribute("entityJson", MappingUtils.toJson(entity));
 
-
-		logger.info("show: " + entity);
+		debug("show", entity);
 		return "entity/show";
 	}
 
